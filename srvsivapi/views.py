@@ -89,7 +89,7 @@ def addSIV(siv_data,srv):
     #srv = SRV.objects.filter(id = siv_data["srv_id"])[0]
     siv = SIV(
         issued_reason = siv_data["issued_reason"],
-        issued_to = createEmployee(siv_data["issued_to"]),
+        issued_to = Employee.objects.filter(id = siv_data["issued_to"]["id"])[0],
         srv_id = srv
     )
     siv.save()
@@ -103,10 +103,10 @@ def addSRV(srv_data):
         indent_department = srv_data["indent_department"],
         remarks = srv_data["remarks"],
         indent_date = getDate(srv_data["indent_date"]),
-        inspected_by = createEmployee(srv_data["inspected_by"]),
-        inspected_countersigned_by = createEmployee(srv_data["inspected_countersigned_by"]),
-        received_by = createEmployee(srv_data["received_by"]),
-        received_countersigned_by = createEmployee(srv_data["received_countersigned_by"])
+        inspected_by = Employee.objects.filter(id = srv_data["inspected_by"]["id"])[0],
+        inspected_countersigned_by = Employee.objects.filter(id = srv_data["inspected_countersigned_by"]["id"])[0],
+        received_by = Employee.objects.filter(id = srv_data["received_by"]["id"])[0],
+        received_countersigned_by = Employee.objects.filter(id = srv_data["received_countersigned_by"]["id"])[0]
     )
     srv.save()
     for item_data in srv_data["items"]:

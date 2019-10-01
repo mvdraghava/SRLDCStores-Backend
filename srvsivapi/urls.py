@@ -9,5 +9,6 @@ urlpatterns = [
     path('createSRV',views.createSRV),
     path('createSIV',views.createSIV),
     path('createsrvsiv',views.createsrvsiv),
-    path('getsrvs', views.getsrvs)
+    path('getsrvs', views.getsrvs),
+    path('getemployees', views.getEmployees)
 ]
