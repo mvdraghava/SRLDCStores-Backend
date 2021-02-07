@@ -25,7 +25,7 @@ SECRET_KEY = 'gi2de=3et=vb^-&)u-k80t(zlj0@y&22we%(bn_bf2$)0rjnyz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost','10.0.100.55', '127.0.0.1']
 
 
 # Application definition
@@ -82,7 +82,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'USER': 'postgres',
-        'PASSWORD': 'rhr20h12',
+        'PASSWORD': 'srldc@123',
         'NAME': 'koshagar',
 
     }
@@ -127,3 +127,5 @@ USE_TZ = True
 
 STATIC_URL = '/assets/'
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+LOGIN_REDIRECT_URL = 'srvsivapi/index'

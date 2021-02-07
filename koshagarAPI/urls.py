@@ -16,10 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include,path
 from django.views.generic.base import TemplateView
+from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('srvsivapi/', include('srvsivapi.urls')),
+    path('accounts', include('django.contrib.auth.urls')),
     path('admin/', admin.site.urls),
+    path('', auth_views.LoginView.as_view()),
 ]
 
 #from django.conf import settings

@@ -31,6 +31,7 @@ class SRV(models.Model):
     name_supplier = models.CharField(max_length = 50)
     indent_ref_no = models.CharField(max_length = 50)
     indent_date = models.DateField(auto_now=False, auto_now_add=False)
+    srvsiv_date = models.DateTimeField(auto_now=False, auto_now_add=False)
     inspected_by = models.ForeignKey(Employee, on_delete=models.CASCADE,related_name='ins')
     inspected_countersigned_by = models.ForeignKey(Employee, on_delete=models.CASCADE,related_name='inscounter')
     received_by = models.ForeignKey(Employee, on_delete=models.CASCADE,related_name='receive')
