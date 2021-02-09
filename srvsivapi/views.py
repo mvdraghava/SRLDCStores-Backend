@@ -82,7 +82,7 @@ def createsrvsiv(request):
         srv = addSRV(srvsiv_data["srvdetails"])
         siv = addSIV(srvsiv_data["sivdetails"],srv)
         return JsonResponse({'id':srv.id,'result':'success'})
-    except:
+    except Exception as ex:
         return JsonResponse({'result':'success'})
 
 def addSIV(siv_data,srv):
@@ -103,6 +103,7 @@ def addSRV(srv_data):
         indent_department = srv_data["indent_department"],
         remarks = srv_data["remarks"],
         indent_date = getDate(srv_data["indent_date"]),
+        srvsiv_date = getDate(srv_data["srvsiv_date"]),
         inspected_by = Employee.objects.filter(id = srv_data["inspected_by"]["id"])[0],
         inspected_countersigned_by = Employee.objects.filter(id = srv_data["inspected_countersigned_by"]["id"])[0],
         received_by = Employee.objects.filter(id = srv_data["received_by"]["id"])[0],
@@ -144,12 +145,13 @@ def getsrvs(request):
             'srvid': ''
         }
         srv["inspected_by"] = getEmployee(srv["inspected_by_id"])
-        srv["inspected_countersigned_by"] = getEmployee(srv["inspected_by_id"])
-        srv["received_by"] = getEmployee(srv["inspected_by_id"])
-        srv["received_countersigned_by"] = getEmployee(srv["inspected_by_id"])
+        srv["inspected_countersigned_by"] = getEmployee(srv["inspected_countersigned_by_id"])
+        srv["received_by"] = getEmployee(srv["received_by_id"])
+        srv["received_countersigned_by"] = getEmployee(srv["received_countersigned_by_id"])
         srv['items'] = getItems(srv['id'])
         srvsiv['srvdetails'] = srv
         srvsiv['sivdetails'] = getSIV(srv['id'])
+        srvsiv['sivdetails']['issued_to'] = getEmployee(srvsiv['sivdetails']['issued_to_id'])
         srvsiv['srvid'] = srv['id']
         srvsiv_data.append(srvsiv)
     return JsonResponse(srvsiv_data, safe=False)

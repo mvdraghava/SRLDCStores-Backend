@@ -1,0 +1,93 @@
+{% load static %}
+
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}"></head>
+    <link rel="stylesheet" href="{% static 'bootstrap-grid.min.css' %}"></head>
+    <link rel="stylesheet" href="{% static 'bootstrap-reboot.min.css' %}"></head>
+    <style>
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+  justify-content: center;
+  width: 100%;
+  min-height: 100%;
+  padding: 20px;
+}
+
+.header {
+  margin-bottom: 15px;
+  margin-left:-5px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.loginform {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+
+}
+
+.labelheader {
+  background-color: dodgerblue;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    color: white;
+    text-align: center;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+
+    </style>
+  </head>
+  <body class="text-center">
+    <div class="container wrapper fadeInDown form-signin">
+    <img class="mb-4" src="../../assets/POSOCO_Final_Logo.png" alt="" width="72" height="72">
+      <div class="row h-100  align-items-center loginform">
+        <div class="col-12 labelheader">
+          <h2 class="h3 col-12">SRV/SIV Form</h2>
+        </div>
+        <form class="col-12" method="post">
+          {% csrf_token %}
+          <div class="form-group row">
+            <label for="id_username" class="col-sm-4 col-form-label">Username:</label>
+            <div class="col-sm-8"> 
+              <input type="text"  class="form-control" name="username" autofocus required id="id_username">
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-sm-4 col-form-label" for="id_password">Password:</label>
+            <div class="col-sm-8"> 
+              <input type="password" class="form-control" name="password" required id="id_password">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+        </form>
+      </div>
+    </div>
+  </body>
+<html>

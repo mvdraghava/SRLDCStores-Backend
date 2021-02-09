@@ -1,5 +1,26 @@
 from django.db import models
 
+def update_employee_table():
+    import pandas as pd
+    df = pd.read_excel("employees.xlsx")
+    for index, row in df.iterrows():
+        try:
+            emp = Employee.objects.get(emp_no = row['emp_no'])
+            emp.emp_no = row['emp_no']
+            emp.name = row['name']
+            emp.designation = row['designation']
+            emp.department = row['department']
+            emp.save()
+        except Employee.DoesNotExist as ex:
+            emp = Employee(
+                emp_no = row['emp_no'],
+                name = row['name'],
+                designation = row['designation'],
+                department = row['department']
+            )
+            emp.save()
+    return
+
 MODEOFRECEIPTS = (
     ('PO','PO'),
     ('LOA','LOA'),
@@ -26,7 +47,7 @@ class Employee(models.Model):
 
 class SRV(models.Model):
     mode_of_receipt = models.CharField(max_length = 10, choices=MODEOFRECEIPTS)
-    indent_department = models.CharField(max_length = 10)
+    indent_department = models.CharField(max_length = 30)
     remarks = models.CharField(max_length = 1000)
     name_supplier = models.CharField(max_length = 50)
     indent_ref_no = models.CharField(max_length = 50)
